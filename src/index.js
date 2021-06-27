@@ -19,8 +19,10 @@ class vtClient {
         await fetch(uploadFile, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'x-apikey': this.key },
-        }).then(res => {
-            return res.json()
+        }).then(res => res.json()).then(json => {
+            if (this.debugger == true) console.log(json);
+            
+            if (json.error.code == "WrongCredentialsError") return console.error("Wrong Credentials Error! Please Make Sure You Entered a Valid API Token...");
         })
     }
 
@@ -30,7 +32,7 @@ class vtClient {
             headers: { 'Content-Type': 'application/json', 'x-apikey': this.key },
         }).then(res => res.json()).then(json => {
             if (this.debugger == true) console.log(json);
-            
+
             if (json.error.code == "WrongCredentialsError") return console.error("Wrong Credentials Error! Please Make Sure You Entered a Valid API Token...");
         })
     }
