@@ -6,6 +6,8 @@ const uploadFile = "https://www.virustotal.com/api/v3/files",
 class vtClient {
     constructor(apiKey) {
         this.key = apiKey;
+
+        if(this.key == undefined) return console.error("Please Provide a Valid VirusTotal API Key!");
 }
 
     async scanFile(file) {
