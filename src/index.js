@@ -1,33 +1,38 @@
-const fetch = require('fetch');
+const fetch = require('node-fetch');
 
 const uploadFile = "https://www.virustotal.com/api/v3/files",
     fileScanInfo = "https://www.virustotal.com/api/v3/files";
 
 class vtClient {
-    constructor(apiKey) {
+    constructor(apiKey, debuggingMode) {
         this.key = apiKey;
+
+        this.debugger;
+        if (debuggingMode == true) this.debugger = true;
+        if (debuggingMode == false) this.debugger = false;
+        if (debuggingMode == undefined) this.debugger = false;
 
         if(this.key == undefined) return console.error("Please Provide a Valid VirusTotal API Key!");
 }
 
     async scanFile(file) {
-        axios({
-            method: 'post',
-            url: uploadFile,
-            headers: { 'x-apikey': this.key }
-        }).then(function (response) {
-            return response;
-        }).catch(err => console.error(err.response.status));
+        await fetch(uploadFile, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'x-apikey': this.key },
+        }).then(res => {
+            return res.json()
+        })
     }
 
     async scanInfo(ID) {
-        await axios({
-            method: 'get',
-            url: `${fileScanInfo}/${ID}`,
-            headers: { 'x-apikey': this.key }
-        }).then(response => {
-            return console.log(response.data)
-        }).catch(err => console.error(err.response.status));
+        return await fetch(`${fileScanInfo}/${ID}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json', 'x-apikey': this.key },
+        }).then(res => res.json()).then(json => {
+            if (this.debugger == true) console.log(json);
+            
+            if (json.error.code == "WrongCredentialsError") return console.error("Wrong Credentials Error! Please Make Sure You Entered a Valid API Token...");
+        })
     }
 
 }
