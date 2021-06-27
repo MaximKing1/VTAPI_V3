@@ -1,5 +1,7 @@
 const fetch = require('node-fetch');
 
+const { createReadStream } = require('fs');
+
 const uploadFile = "https://www.virustotal.com/api/v3/files",
     fileScanInfo = "https://www.virustotal.com/api/v3/files";
 
@@ -16,8 +18,10 @@ class vtClient {
 }
 
     async scanFile(file) {
+        const fileUploaded = createReadStream(file);
         await fetch(uploadFile, {
             method: 'POST',
+            body: fileUploaded,
             headers: { 'Content-Type': 'application/json', 'x-apikey': this.key },
         }).then(res => res.json()).then(json => {
             if (this.debugger == true) console.log(json);
