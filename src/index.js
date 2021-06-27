@@ -1,4 +1,4 @@
-const axios = require('axios');
+const fetch = require('fetch');
 
 const uploadFile = "https://www.virustotal.com/api/v3/files",
     fileScanInfo = "https://www.virustotal.com/api/v3/files";
