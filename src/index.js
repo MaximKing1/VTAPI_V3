@@ -5,7 +5,8 @@ const { createReadStream } = require('fs');
 const uploadFile = "https://www.virustotal.com/api/v3/files",
     fileScanInfo = "https://www.virustotal.com/api/v3/files",
     scanURL = "https://www.virustotal.com/api/v3/urls",
-    scanDomain = "https://www.virustotal.com/api/v3/domains";
+    scanDomain = "https://www.virustotal.com/api/v3/domains",
+    scanIP = "https://www.virustotal.com/api/v3/ip_addresses";
 
 class vtClient {
     constructor(apiKey, debuggingMode) {
@@ -64,6 +65,19 @@ class vtClient {
 
     async scanDomain(domain) {
         return await fetch(`${scanDomain}/${domain}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json', 'x-apikey': this.key },
+        }).then(res => res.json()).then(json => {
+            if (this.debugger == true) console.log(json);
+
+            if (json.error.code == "WrongCredentialsError") console.error("Wrong Credentials Error! Please Make Sure You Entered a Valid API Token...");
+
+            return json
+        })
+    }
+
+    async scanIP(IP) {
+        return await fetch(`${scanIP}/${IP}`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', 'x-apikey': this.key },
         }).then(res => res.json()).then(json => {

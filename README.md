@@ -24,6 +24,18 @@ client.scanDomain("DOMAIN.COM/URL").then(res => {
 });
 ```
 
+## Scan IP
+```js
+const { vtClient } = require('vtotal_v3');
+
+const client = new vtClient("NUNYA", false); // ("apiKey", extraDebuggingMode <true | false>) 
+
+client.scanDomain("IP_ADDRESS").then(res => {
+    console.log(res)
+    // Your Code Here!
+});
+```
+
 ## Scan Domain
 ```js
 const { vtClient } = require('vtotal_v3');
