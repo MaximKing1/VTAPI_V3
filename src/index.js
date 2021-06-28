@@ -3,7 +3,8 @@ const fetch = require('node-fetch');
 const { createReadStream } = require('fs');
 
 const uploadFile = "https://www.virustotal.com/api/v3/files",
-    fileScanInfo = "https://www.virustotal.com/api/v3/files";
+    fileScanInfo = "https://www.virustotal.com/api/v3/files",
+    scanURL = "https://www.virustotal.com/api/v3/urls";
 
 class vtClient {
     constructor(apiKey, debuggingMode) {
@@ -19,6 +20,7 @@ class vtClient {
 
     async scanFile(file) {
         const fileUploaded = createReadStream(file);
+
         await fetch(uploadFile, {
             method: 'POST',
             body: fileUploaded,
@@ -35,6 +37,20 @@ class vtClient {
     async scanInfo(ID) {
         return await fetch(`${fileScanInfo}/${ID}`, {
             method: 'GET',
+            headers: { 'Content-Type': 'application/json', 'x-apikey': this.key },
+        }).then(res => res.json()).then(json => {
+            if (this.debugger == true) console.log(json);
+
+            if (json.error.code == "WrongCredentialsError") console.error("Wrong Credentials Error! Please Make Sure You Entered a Valid API Token...");
+
+            return json
+        })
+    }
+
+    async scanURL(url) {
+        return await fetch(scanURL, {
+            method: 'GET',
+            body: { 'url': url },
             headers: { 'Content-Type': 'application/json', 'x-apikey': this.key },
         }).then(res => res.json()).then(json => {
             if (this.debugger == true) console.log(json);
