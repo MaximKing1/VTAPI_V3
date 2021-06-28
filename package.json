@@ -1,12 +1,12 @@
 {
   "name": "vtapi_v3",
-  "version": "1.0.0",
-  "description": "VirusTotal API Version 3",
+  "version": "1.0.1",
+  "description": "VirusTotal API Version 3 - Scan Domains, Files and URL's using this package and so much more!",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "MKComputing Inc (Maxim King <maxim@mkcomputing.uk>)",
   "license": "ISC",
   "dependencies": {
     "node-fetch": "^2.6.1"
