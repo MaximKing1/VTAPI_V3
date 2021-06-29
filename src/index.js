@@ -11,6 +11,7 @@ class vtClient {
         this.key = apiKey;
 
         this.debugger;
+        
         if (debuggingMode == true) this.debugger = true;
         if (debuggingMode == false) this.debugger = false;
         if (debuggingMode == undefined) this.debugger = false;
