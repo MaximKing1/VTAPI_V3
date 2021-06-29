@@ -1,6 +1,6 @@
 {
   "name": "vtapi_v3",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "VirusTotal API Version 3 - Scan Domains, Files and URL's using this package and so much more!",
   "main": "main.js",
   "homepage": "https://github.com/MaximKing1/VTAPI_V3",
