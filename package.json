@@ -6,7 +6,14 @@
   "homepage": "https://github.com/MaximKing1/VTAPI_V3",
   "bugs": "https://github.com/MaximKing1/VTAPI_V3/issues",
   "keywords": [
-    "virustotal", "virustotal-api", "virustotal-v3", "MKComputing", "domains", "ips", "urls", "scan"
+    "virustotal",
+    "virustotal-api",
+    "virustotal-v3",
+    "MKComputing",
+    "domains",
+    "ips",
+    "urls",
+    "scan"
   ],
   "repository": {
     "type": "git",
@@ -23,5 +30,8 @@
   "license": "ISC",
   "dependencies": {
     "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "auto": "^10.29.3"
   }
 }
