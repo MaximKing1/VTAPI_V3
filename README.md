@@ -51,3 +51,17 @@ client.scanDomain("DOMAIN.COM").then(res => {
     // Your Code Here!
 });
 ```
+
+## Fetch File Feeds at Certain Time
+```js
+const { vtClient } = require('vtotal_v3');
+
+const client = new vtClient("NUNYA", false); // ("apiKey", extraDebuggingMode <true | false>) 
+
+client.fetchFileFeedTimes("20200307").then(res => { // YYYYMMDD 2020 03 07 etc
+    console.log(res)
+    // Your Code Here!
+});
+```
+
+fetchFileFeedTimes
